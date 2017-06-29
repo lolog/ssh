@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- debug -->
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.multipart.saveDir" value="E:\temp"/>
+	
+	<package name="ssh" extends="json-default">
+		<interceptors>
+			<interceptor name="loginInterceptor" class="cn.jl.test.interceptor.LoginInterceptor"/>
+		</interceptors>
+		<action name="category-*" class="categoryAction" method="{1}">
+			<result name="SUCCESS">/index.jsp</result>
+			<!-- return JSON -->
+			<result name="json" type="json">
+				<!-- 1. 如果配置root,则把root转化为json格式 2. 如果没有配置,那么将值栈栈顶的值转化为json格式 3. root配置为需要转换为Json的数据 -->
+				<param name="root">json</param>
+
+				<!-- 配置黑名单,过滤不需要的字段 {"row":[{"hot":true,"id":1,"type":"女士服装0"}],"key":1} -->
+				<param name="excludeProperties">row\[\d+\].id</param>
+			</result>
+			<result name="login">/user/login.jsp</result>
+			<!-- <interceptor-ref name="loginInterceptor"/> -->
+		</action>
+		<action name="confirm-*" class="loginAction" method="{1}">
+			<result name="index">/index.jsp</result>
+			<result name="login" type="redirect">/user/login.jsp</result>
+			<result name="goUrl" type="redirect">
+				${#session.goUrl}
+			</result>
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<!-- 如果是prototype类,默认情况是使用的时候创建,不会启动的时候创建 -->
+	<!-- 
+		<bean id="baseAction" class="cn.jl.test.action.BaseAction" scope="prototype">
+			<property name="categoryService" ref="categoryService"></property>
+		</bean>
+		<bean id="categoryAction" class="cn.jl.test.action.CategoryAction" scope="prototype">
+			<property name="categoryService" ref="categoryService"></property>
+		</bean> 
+	-->
+</beans>
